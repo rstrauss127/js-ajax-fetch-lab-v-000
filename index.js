@@ -33,7 +33,7 @@ function createIssue() {
   const title = document.querySelector('#title').value;
   const content = document.querySelector('#body').value;
   const body = JSON.stringify({ title: title, body: content });
-  const path = `https://api.github.com/repos/${user}/${getRepo()}/issues`;
+  const path = `https://api.github.com/repos/${user}/js-ajax-fetch-lab/issues`;
   fetch(path, {
     method: 'post',
     headers: getHeader(),
