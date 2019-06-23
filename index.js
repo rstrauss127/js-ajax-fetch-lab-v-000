@@ -1,5 +1,5 @@
 const baseURL = 'https://api.github.com';
-const user = '<YOUR_USERNAME>';
+const user = 'rstrauss127';
 
 function getToken() {
   //change to your token to run in browser, but set
@@ -24,7 +24,6 @@ function forkRepo() {
 }
 
 function showResults(json) {
-  link = json.html_url;
   html = `<p id="repo-name">` + json.name + `</p><p div="owner">${json.owner.login}</p> <a href=${json.html_url}> Newly Created Fork</a>`
   document.getElementById('results').innerHTML = html;
 }
@@ -34,7 +33,7 @@ function createIssue() {
   const title = document.querySelector('#title').value;
   const content = document.querySelector('#body').value;
   const body = JSON.stringify({ title: title, body: content });
-  const path = `https://api.github.com/repos/${getOwner()}/${getRepo()}/issues`;
+  const path = `https://api.github.com/repos/${user}/${getRepo()}/issues`;
   fetch(path, {
     method: 'post',
     headers: getHeader(),
