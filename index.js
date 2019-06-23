@@ -25,7 +25,7 @@ function forkRepo() {
 
 function showResults(json) {
   link = json.html_url;
-  html = '<a href="#">' + link + '</a>';
+  html = `<p id="repo-name">` + json.name + `</p><p div="owner">${json.owner.login}</p> <a href=${json.html_url}> Newly Created Fork</a>`
   document.getElementById('results').innerHTML = html;
 }
 
