@@ -7,17 +7,40 @@ function getToken() {
   return '';
 }
 
+function getHeader(){
+  return { Authorization: `token ${getToken()}` }
+}
+
 function forkRepo() {
+  const prefix = 'https://api.github.com/repos/';
   const repo = 'learn-co-curriculum/js-ajax-fetch-lab';
-  //use fetch to fork it!
+  const postscript = '/forks';
+  const path = prefix + repo + postscript;
+  fetch(path, {
+    method: 'post',
+    headers: getHeader()
+  }).then(res => res.json())
+  .then(json => showResults(json));
 }
 
 function showResults(json) {
-  //use this function to display the results from forking via the API
+  link = json.html_url;
+  html = '<a href="#">' + link + '</a>';
+  document.getElementById('results').innerHTML = html;
 }
 
 function createIssue() {
   //use this function to create an issue based on the values input in index.html
+  const title = document.querySelector('#title').value;
+  const content = document.querySelector('#body').value;
+  const body = JSON.stringify({ title: title, body: content });
+  const path = `https://api.github.com/repos/${getOwner()}/${getRepo()}/issues`;
+  fetch(path, {
+    method: 'post',
+    headers: getHeader(),
+    body: body
+  })
+  .then(res => getIssues());
 }
 
 function getIssues() {
